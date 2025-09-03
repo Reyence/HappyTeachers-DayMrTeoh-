@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy Teachers' Day!</title>
+
+  <!-- Retro pixel fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --mint-1:#E9FFF6;
+      --mint-2:#D7FAEC;
+      --mint-3:#C3F0DB;
+      --mint-4:#AEEBD5;
+      --mint-5:#7FD9C1;
+      --mint-ink:#1F3B36;
+      --accent:#FF79C6;
+      --gold:#FFD766;
+      --shadow:#174B44;
+      --card:#ffffff;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;color:var(--mint-ink);background:linear-gradient(180deg,var(--mint-1),var(--mint-3));overflow-x:hidden}
+    body{font-family:'VT323', monospace;letter-spacing:.2px}
+    .grid{position:fixed;inset:0;pointer-events:none;opacity:.25;background-image:linear-gradient(to right,rgba(23,75,68,.12) 1px,transparent 1px),linear-gradient(to bottom,rgba(23,75,68,.12) 1px,transparent 1px);background-size:12px 12px;mix-blend-mode:multiply}
+    header{padding:40px 20px 10px;text-align:center}
+    .title{font-family:'Press Start 2P';font-size:clamp(18px,5vw,44px);text-shadow:0 2px 0 #fff,0 4px 0 var(--mint-5),0 6px 0 var(--shadow);display:inline-block;position:relative;padding:14px 16px 18px;background:linear-gradient(180deg,#fff,var(--mint-2));border:4px solid var(--mint-5);box-shadow:0 0 0 4px var(--mint-4),6px 6px 0 0 var(--shadow);border-radius:10px}
+    .type{display:inline-block;white-space:nowrap;overflow:hidden;border-right:.2em solid var(--accent);animation:caret 900ms steps(1) infinite}
+    @keyframes caret{50%{border-right-color:transparent}}
+    .subtitle{margin:14px auto 0;font-size:clamp(14px,2.8vw,22px);opacity:.9}
+    .hearts{position:fixed;left:0;right:0;bottom:-20vh;pointer-events:none;z-index:0}
+    .heart{position:absolute;width:14px;aspect-ratio:1;background:var(--accent);transform:rotate(45deg);animation:floatUp linear forwards;opacity:.8}
+    .heart:before,.heart:after{content:"";position:absolute;width:14px;height:14px;border-radius:50%;background:var(--accent);top:-7px;left:0}
+    .heart:after{left:-7px;top:0}
+    @keyframes floatUp{to{transform:translateY(-110vh) rotate(45deg);opacity:0}}
+    main{max-width:960px;margin:24px auto;padding:0 18px 80px;position:relative;z-index:1}
+    .card{background:var(--card);border:3px solid var(--mint-5);border-radius:14px;box-shadow:6px 6px 0 0 var(--shadow);padding:24px;margin:18px 0;transform:translateY(18px);opacity:0;animation:reveal .9s ease-out forwards}
+    .card:nth-child(1){animation-delay:.2s}.card:nth-child(2){animation-delay:.35s}.card:nth-child(3){animation-delay:.5s}.card:nth-child(4){animation-delay:.65s}
+    @keyframes reveal{from{transform:translateY(18px) scale(.98);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
+    h2{font-family:'Press Start 2P';font-size:clamp(14px,2.6vw,20px);margin:0 0 14px;color:var(--shadow);text-transform:uppercase;letter-spacing:1px}
+    p{font-size:clamp(16px,3.6vw,22px);line-height:1.5;margin:.6rem 0}
+    .divider{margin:26px auto;width:100%;height:12px;background:linear-gradient(90deg,var(--gold) 10px,transparent 10px) left top/22px 6px repeat-x,linear-gradient(90deg,var(--gold) 10px,transparent 10px) left bottom/22px 6px repeat-x}
+    footer{text-align:center;padding:20px;font-size:14px;opacity:.8}
+    @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.grid,.hearts{display:none}}
+  </style>
+</head>
+<body>
+  <div class="grid" aria-hidden="true"></div>
+  <canvas id="confetti" aria-hidden="true" style="position:fixed;inset:0;z-index:2;pointer-events:none;"></canvas>
+
+  <header>
+    <div class="title"><span id="typewriter" class="type">Happy Teachers' Day!</span></div>
+    <p class="subtitle">To: <strong>Mr/Ms [Your Teacher’s Name]</strong> from a very grateful student 💚</p>
+  </header>
+
+  <div class="hearts" id="hearts"></div>
+
+  <main id="message">
+    <section class="card">
+      <h2>Dear Teacher</h2>
+      <p>Happy Teachers' Day! Thank you for being more than a form teacher. You noticed, you listened, and you showed care that went beyond the classroom. You always check on how I am doing and remind me to take care of my sleep. That means a lot.</p>
+      <div class="divider"></div>
+      <p>Even though you do not teach me directly, you still guide me like I am your own student. Your empathy and patience make me feel supported and understood.</p>
+    </section>
+
+    <section class="card">
+      <h2>Helping me grow</h2>
+      <p>You helped me improve my communication skills and gave me the confidence to express ideas more clearly. The way you guide and push me to improve has shaped the way I think and share my thoughts.</p>
+    </section>
+
+    <section class="card">
+      <h2>Your care</h2>
+      <p>What stands out is how you care about my well being. You remind me to rest and to take care of myself. Small actions like this show that you value me as a person, not just as a student.</p>
+    </section>
+
+    <section class="card">
+      <h2>Thank you</h2>
+      <p>I will carry your lessons forward and remember the way you lead with empathy. Wishing you joy, good rest, and students who appreciate you as much as I do. 🌟</p>
+    </section>
+  </main>
+
+  <footer>Made with 💚 mint pixels and gratitude</footer>
+
+  <script>
+    // Typewriter
+    (function(){
+      const el=document.getElementById('typewriter');
+      const text="Happy Teachers' Day!";
+      el.textContent="";
+      let i=0;
+      const tick=()=>{if(i<=text.length){el.textContent=text.slice(0,i++);setTimeout(tick,70);}};
+      tick();
+    })();
+
+    // Hearts
+    (function(){
+      const container=document.getElementById('hearts');
+      function makeHeart(){
+        const h=document.createElement('div');
+        h.className='heart';
+        const vw=Math.max(document.documentElement.clientWidth||0,window.innerWidth||0);
+        h.style.left=Math.random()*vw+'px';
+        const dur=6+Math.random()*5;
+        h.style.animationDuration=dur+'s';
+        h.style.opacity=0.6+Math.random()*0.35;
+        container.appendChild(h);
+        setTimeout(()=>container.removeChild(h),dur*1000);
+      }
+      setInterval(makeHeart,500);
+      for(let i=0;i<15;i++) setTimeout(makeHeart,i*120);
+    })();
+
+    // Confetti
+    (function(){
+      const canvas=document.getElementById('confetti');
+      const ctx=canvas.getContext('2d');
+      let W,H,pieces=[];
+      const colors=['#ffffff','#AEEBD5','#7FD9C1','#FFD766','#FF79C6'];
+      const resize=()=>{W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;};
+      window.addEventListener('resize',resize);resize();
+      function burst(x=W/2,y=H/3,count=150){
+        for(let i=0;i<count;i++){
+          const angle=Math.random()*Math.PI*2;
+          const speed=2+Math.random()*5;
+          pieces.push({x,y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed-2,size:3+Math.random()*5,color:colors[(Math.random()*colors.length)|0],life:60+Math.random()*60,spin:(Math.random()-.5)*0.2});
+        }
+      }
+      function step(){
+        ctx.clearRect(0,0,W,H);
+        for(let i=pieces.length-1;i>=0;i--){
+          const p=pieces[i];
+          p.vy+=0.05;
+          p.x+=p.vx;
+          p.y+=p.vy;
+          p.life-=1;
+          ctx.save();
+          ctx.translate(p.x,p.y);
+          ctx.rotate(p.spin*(p.life));
+          ctx.fillStyle=p.color;
+          ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size);
+          ctx.restore();
+          if(p.life<=0||p.y>H+20) pieces.splice(i,1);
+        }
+        requestAnimationFrame(step);
+      }
+      step();
+      burst();
+    })();
+  </script>
+</body>
+</html>
